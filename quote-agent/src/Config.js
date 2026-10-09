@@ -26,9 +26,12 @@ var CONFIG = {
   // sent to Claude from these. Shared inboxes are checked in full.
   KEYWORD_INBOXES: ['pablo.castro@intelygente.net'],
   QUOTE_KEYWORDS: ['cotización', 'cotizacion', 'cotizar', 'presupuesto', 'tarifa', 'tarifas',
-    'propuesta', 'quote', 'quotation', 'estimate', 'budget', 'rates', 'proposal', 'pricing'],
+    'propuesta', 'precio', 'precios', 'costo', 'costos', 'valor', 'quote', 'quotation', 'estimate',
+    'budget', 'rates', 'proposal', 'pricing', 'price', 'prices', 'cost'],
 
-  // How far back the first run looks, and how far back hourly runs look.
+  // How far back the first run looks, and how far back scheduled runs look.
+  // Scheduled runs happen every RUN_EVERY_HOURS hours (1, 2, 4, 6, 8 or 12).
+  RUN_EVERY_HOURS: 4,
   FIRST_RUN_DAYS: 28,
   DAILY_LOOKBACK_DAYS: 3,
 

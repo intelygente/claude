@@ -1,6 +1,6 @@
 # Quote Agent: setup guide
 
-Phase 1 reads your inboxes every hour. It spots quote requests, prices them from your rate sheet, builds a draft deck and adds a row to a tracker sheet. It never sends or drafts emails. Phase 2 (email drafts) and Phase 3 (follow-ups) come after Phase 1 works on your real inbox.
+Phase 1 reads your inboxes every 4 hours. It spots quote requests, prices them from your rate sheet, builds a draft deck and adds a row to a tracker sheet. It never sends or drafts emails. Phase 2 (email drafts) and Phase 3 (follow-ups) come after Phase 1 works on your real inbox.
 
 Expect about 45 minutes the first time. Do the steps in order.
 
@@ -45,27 +45,28 @@ Two things the agent does not watch yet, so tell me if they matter:
 A Google file ID is the long code in its link, between `/d/` and `/edit`.
 
 - **Rate sheet ID:** from the rate sheet link.
-- **Template ID:** you get this in Step 4.
+- **Template IDs:** the two templates from Step 4.
 
 ---
 
-## Step 4. Prepare the deck template (15 min, or I can do it for you)
+## Step 4. Review the deck templates (10 min)
 
-The agent never edits your original decks. It copies a template and fills in the blanks. Make a copy of your most recent quote deck, name it `TEMPLATE Quote EN` and make these changes:
+Claude already built both templates in your Drive from your sample deck. Your original deck was not touched.
 
-1. **Title slide:** add a line with `{{CLIENT_COMPANY}}` and one with `{{PROJECT_TITLE}}`.
-2. **New "Why us for this project" slide** after "Our Director": a text box with `{{INTRO}}` and another with `{{SELLING_POINTS}}`. This is where the custom selling points go. Leave "Our Director" as fixed text, and remove the automotive line since that was specific to one client.
-3. **Each "Relevant Samples" slide:** in the speaker notes (below the slide), write `#samples` followed by what it shows, for example `#samples automotive commercial aerial`. Categories the agent knows: automotive, corporate, interview, industrial, energy, aerial, commercial, documentary, photography, event, animation, social. The agent keeps only the sample slides that match the request.
-4. **Investment slide:**
-   - Speaker notes: `#investment`
-   - Title: `Investment {{OPTION_NAME}}`
-   - Table: a header row (Item, Qty, Unit price, Total), then **12 empty rows**, then three rows whose last cell says `{{SUBTOTAL}}`, `{{VAT}}` and `{{TOTAL}}`.
-   - Below the table, a text box with `{{DELIVERABLES}}` and another with `{{TERMS}}`. Payment terms, billing entity and cancellation policy come from the settings, not from the AI.
-   - Delete the old fixed text about payment, insurance and **"unlimited usage rights"**. Your new rate sheet excludes usage rights, so a template that promises them would contradict your prices. `{{TERMS}}` replaces all of it.
+- **TEMPLATE Quote EN** and **TEMPLATE Quote ES** (the Spanish one is a translation of the English one, so please read it once).
 
-If the client asks for alternatives, such as filming only and filming plus post, the agent duplicates the investment slide once per option.
+What changed compared with your sample deck:
+1. **Title slide:** two new lines, `Prepared for {{CLIENT_COMPANY}}` and `{{PROJECT_TITLE}}`.
+2. **Our Director:** the automotive line was removed, since it was specific to one client.
+3. **New "Why Us for This Project" slide** after Our Director, with `{{INTRO}}` and `{{SELLING_POINTS}}`. This is where the custom selling points go.
+4. **Investment slide:** title `Investment {{OPTION_NAME}}`, a clean table (header, 12 empty rows, then subtotal, VAT and total), and one text box with `{{DELIVERABLES}}` and `{{TERMS}}`. The old fixed text about payment, insurance and **"unlimited usage rights"** is gone, because your new rate sheet excludes usage rights. Payment terms, billing entity and cancellation policy now come from the settings, not from the AI.
+5. **Speaker notes:** the investment slide has `#investment`. Each "Relevant Samples" slide has `#samples` followed by every category.
 
-Copy the template's ID for Step 5. A Spanish version (`TEMPLATE Quote ES`) is optional. Until it exists, Spanish requests get the English deck and the tracker flags it.
+**Your 2-minute job:** on each "Relevant Samples" slide, open the speaker notes (below the slide) and delete the categories that slide does not show. For example, a slide with car work should keep `#samples automotive commercial aerial`. The agent keeps only the sample slides that match the request. Do it in both templates. Categories: automotive, corporate, interview, industrial, energy, aerial, commercial, documentary, photography, event, animation, social.
+
+Also check the fonts and spacing of the new lines on the title slide and in the terms box. Placeholders like `{{TERMS}}` get longer once filled in.
+
+Put the IDs of both templates in Step 5 (`TEMPLATE_ID_EN` and `TEMPLATE_ID_ES`).
 
 ---
 
@@ -80,8 +81,8 @@ Copy the template's ID for Step 5. A Spanish version (`TEMPLATE Quote ES`) is op
 |---|---|
 | `ANTHROPIC_API_KEY` | the key from Step 1 |
 | `RATE_SHEET_ID` | the rate sheet ID |
-| `TEMPLATE_ID_EN` | the template ID from Step 4 |
-| `TEMPLATE_ID_ES` | optional, the Spanish template ID |
+| `TEMPLATE_ID_EN` | ID of TEMPLATE Quote EN |
+| `TEMPLATE_ID_ES` | ID of TEMPLATE Quote ES |
 
 5. Save (Ctrl+S or Cmd+S).
 
@@ -95,7 +96,9 @@ Copy the template's ID for Step 5. A Spanish version (`TEMPLATE Quote ES`) is op
    - a **Quote Agent Tracker** spreadsheet in your Drive,
    - a **Quote Agent Decks** folder,
    - a Gmail label `quote-agent/quote-request`,
-   - an hourly trigger.
+   - a trigger that runs it every 4 hours.
+
+   Already ran `setup` before this update? Paste the new `QuoteAgent.gs` and run `setup` again. It replaces the old trigger.
 
 ---
 
@@ -105,7 +108,7 @@ Copy the template's ID for Step 5. A Spanish version (`TEMPLATE Quote ES`) is op
 2. Open **Quote Agent Tracker**. Each quote request has a row with its type, the totals, the deck link, items it could not price and questions to ask the client.
 3. Compare a couple of rows with what you actually sent. Tell me what is off (prices, tone, slides kept, the type it chose) and I will tune it.
 
-From then on it runs every hour on its own.
+From then on it runs every 4 hours on its own. To change that, edit `RUN_EVERY_HOURS` in `CONFIG` and run `setup` again.
 
 ---
 
@@ -119,7 +122,7 @@ From then on it runs every hour on its own.
   - `Tender or complex: Pablo quotes`: formal terms of reference or multi-region jobs. You get a summary and draft line items, no deck.
 - **Pause it:** in script.google.com, open **Triggers** (the clock icon) and delete the trigger.
 - **Reprocess an email:** delete its row in the tracker's **Log** tab. It is picked up again on the next run.
-- **Errors:** if Claude or Google fails (no credits left, an outage), the agent retries on the next hourly runs. After 3 failed tries the email shows up in Quotes as `Error: handle by hand`, so no lead disappears silently.
+- **Errors:** if Claude or Google fails (no credits left, an outage), the agent retries on the next scheduled runs. After 3 failed tries the email shows up in Quotes as `Error: handle by hand`, so no lead disappears silently.
 - **Who bills:** Colombian clients are quoted by Intelygente SAS in COP plus IVA (19%). Everyone else is quoted by Yellow Film Machine LLC in USD. This depends on the client's country, not on the inbox the request arrived at.
 
 ## Settings you can change

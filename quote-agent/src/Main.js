@@ -4,7 +4,7 @@
  *   Gmail -> triage (Claude) -> scope extraction (Claude) -> pricing (code)
  *         -> quote deck copy (Slides) -> tracker row (Sheets)
  *
- * Phase 1 never sends or drafts email. It only prepares decks and tracker
+ * Runs every few hours. Phase 1 never sends or drafts email. It only prepares decks and tracker
  * rows for Pablo to review.
  */
 
@@ -43,7 +43,7 @@ function setup() {
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'runScheduled') ScriptApp.deleteTrigger(t);
   });
-  ScriptApp.newTrigger('runScheduled').timeBased().everyHours(1).create();
+  ScriptApp.newTrigger('runScheduled').timeBased().everyHours(CONFIG.RUN_EVERY_HOURS).create();
 
   Logger.log('Setup done. Tracker: ' + SpreadsheetApp.openById(prop_('TRACKER_ID', true)).getUrl());
 }
@@ -58,7 +58,7 @@ function runBackfill() {
   Logger.log(done ? 'Backfill finished.' : 'Time limit reached. Run runBackfill again to continue.');
 }
 
-/** Hourly trigger. */
+/** Scheduled trigger (every CONFIG.RUN_EVERY_HOURS hours). */
 function runScheduled() { run_(CONFIG.DAILY_LOOKBACK_DAYS); }
 
 /** Returns true when every matching thread was looked at. */

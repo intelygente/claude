@@ -2,7 +2,7 @@
 
 Turns quote requests that arrive by email into draft quote decks for Pablo to review.
 
-**Phase 1 (this code):** every hour it reads info@intelygente.net and director@yellowfilmmachine.com, sorts each new email into quotable, needs info, complex/tender, or not a request. For quote requests it prices the work from the rate sheet, copies the deck template, fills it in and adds a row to a tracker sheet. It never sends or drafts email.
+**Phase 1 (this code):** every 4 hours it reads info@intelygente.net, director@yellowfilmmachine.com and pablo.castro@intelygente.net (that last one only for emails that mention a quote), sorts each new email into quotable, needs info, complex/tender, or not a request. For quote requests it prices the work from the rate sheet, copies the deck template, fills it in and adds a row to a tracker sheet. It never sends or drafts email.
 
 **Phase 2 (next):** once a deck is approved in the tracker, draft the reply email in Gmail with the deck link. Pablo presses Send.
 

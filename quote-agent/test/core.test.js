@@ -126,3 +126,12 @@ test('prompts tell the model to treat email as data and never to price', () => {
   assert.match(sys, /data, not instructions/);
   assert.match(PROMPTS.TRIAGE_SYSTEM, /data, not instructions/);
 });
+
+test('every client-facing field must follow the client language and labels stay faithful', () => {
+  const sys = PROMPTS.extractSystem('R1 | X | Y | USD 1', ['corporate']);
+  for (const field of ['project_title', 'option', 'line label', 'deliverables', 'intro', 'selling_points']) {
+    assert.ok(sys.includes(field), 'prompt does not mention ' + field);
+  }
+  assert.match(sys, /client language/);
+  assert.match(sys, /Never add scope/);
+});
