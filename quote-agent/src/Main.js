@@ -125,8 +125,14 @@ function clearAttempts_(messageId) {
 }
 
 function buildQuery_(days) {
-  var inboxes = CONFIG.INBOXES.map(function (a) { return 'to:' + a + ' OR deliveredto:' + a; }).join(' OR ');
-  return '(' + inboxes + ') newer_than:' + days + 'd -category:promotions -category:social -in:chats';
+  var addr = function (a) { return 'to:' + a + ' OR deliveredto:' + a; };
+  var full = CONFIG.INBOXES.filter(function (a) { return CONFIG.KEYWORD_INBOXES.indexOf(a) === -1; });
+  var parts = full.map(addr);
+  if (CONFIG.KEYWORD_INBOXES.length) {
+    var keywords = CONFIG.QUOTE_KEYWORDS.join(' OR ');
+    parts.push('((' + CONFIG.KEYWORD_INBOXES.map(addr).join(' OR ') + ') (' + keywords + '))');
+  }
+  return '(' + parts.join(' OR ') + ') newer_than:' + days + 'd -category:promotions -category:social -in:chats';
 }
 
 /** Pablo's own addresses: his account plus its "Send mail as" aliases. */

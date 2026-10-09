@@ -155,3 +155,11 @@ test('a thread where Pablo wrote last is skipped', () => {
   assert.equal(vm.runInContext('run_(3)', sandbox), true);
   assert.equal(appended.Quotes.length + appended.Log.length, 0);
 });
+
+test('shared inboxes are searched in full, the personal inbox only with quote keywords', () => {
+  const { sandbox } = buildSandbox([]);
+  const q = vm.runInContext('buildQuery_(3)', sandbox);
+  assert.match(q, /^\(to:info@intelygente\.net OR deliveredto:info@intelygente\.net OR to:director@yellowfilmmachine\.com/);
+  assert.match(q, /\(\(to:pablo\.castro@intelygente\.net OR deliveredto:pablo\.castro@intelygente\.net\) \(cotización OR /);
+  assert.match(q, /newer_than:3d/);
+});

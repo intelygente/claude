@@ -17,8 +17,16 @@
 
 var CONFIG = {
   // Inboxes the agent watches. Replies go out from the inbox that received
-  // the request (Phase 2).
-  INBOXES: ['info@intelygente.net', 'director@yellowfilmmachine.com'],
+  // the request (Phase 2). Order matters: when a thread reached several of
+  // them, the first match wins.
+  INBOXES: ['info@intelygente.net', 'director@yellowfilmmachine.com', 'pablo.castro@intelygente.net'],
+
+  // Personal inboxes get far more email than the shared ones. To keep the
+  // Claude bill small, only emails that mention a quote-related word are
+  // sent to Claude from these. Shared inboxes are checked in full.
+  KEYWORD_INBOXES: ['pablo.castro@intelygente.net'],
+  QUOTE_KEYWORDS: ['cotización', 'cotizacion', 'cotizar', 'presupuesto', 'tarifa', 'tarifas',
+    'propuesta', 'quote', 'quotation', 'estimate', 'budget', 'rates', 'proposal', 'pricing'],
 
   // How far back the first run looks, and how far back hourly runs look.
   FIRST_RUN_DAYS: 28,
