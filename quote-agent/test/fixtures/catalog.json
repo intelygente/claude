@@ -1,0 +1,124 @@
+{
+  "_note": "Made-up numbers. Same layout as the real rate sheet, not its prices. This repo is public.",
+  "rows": [
+    [],
+    [
+      "",
+      "VIDEO PRODUCTION RATE SHEET (TEST)"
+    ],
+    [
+      "",
+      "Prices in USD. MAX DISCOUNT RATE is internal."
+    ],
+    [],
+    [
+      "",
+      "SERVICE DESCRIPTION",
+      "TIME",
+      "RATE (USD)",
+      "MAX DISCOUNT RATE"
+    ],
+    [
+      "",
+      "PRE-PRODUCTION"
+    ],
+    [
+      "",
+      "Creative concept",
+      "1-3 business days",
+      "$100",
+      "$80"
+    ],
+    [
+      "",
+      "PRODUCTION (1 shooting day, post-production not included)"
+    ],
+    [
+      "",
+      "1-camera interview shoot",
+      "1 day (8 hrs)",
+      "$1,000",
+      "$800"
+    ],
+    [
+      "",
+      "2-camera shoot",
+      "1 day (8 hrs)",
+      "$2,000",
+      "$1,600"
+    ],
+    [
+      "",
+      "POST-PRODUCTION (price per edited minute unless noted)"
+    ],
+    [
+      "",
+      "Editing: corporate video (per edited minute)",
+      "2-7 business days",
+      "$50",
+      "$40"
+    ],
+    [
+      "",
+      "ADD-ONS AND TRAVEL"
+    ],
+    [
+      "",
+      "Drone kit + certified operator (per day)",
+      "",
+      "$300",
+      "$240"
+    ],
+    [
+      "",
+      "Hotel (per person per night)",
+      "",
+      "$100",
+      "$95"
+    ],
+    [],
+    [
+      "",
+      "PHOTOGRAPHY (retouching included)"
+    ],
+    [
+      "",
+      "Professional photo shoot, full day",
+      "1 day (8 hrs)",
+      "$1,500",
+      "$1,200"
+    ],
+    [
+      "",
+      "PHOTOGRAPHY ADD-ONS"
+    ],
+    [
+      "",
+      "Extra retouched photo, basic (per photo)",
+      "",
+      "$5",
+      "$4"
+    ],
+    [
+      "",
+      "Makeup and hair artist (per day)",
+      "",
+      "$200",
+      "$160"
+    ],
+    [
+      "",
+      "Art director (per day)",
+      "",
+      "$300",
+      "$240"
+    ],
+    [
+      "",
+      "Rush delivery (48 hrs) surcharge (per job)",
+      "",
+      "$150",
+      "$120"
+    ]
+  ]
+}

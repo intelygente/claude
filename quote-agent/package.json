@@ -1,0 +1,8 @@
+{
+  "name": "quote-agent",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build": "node build.js"
+  }
+}
