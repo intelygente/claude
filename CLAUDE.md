@@ -18,6 +18,6 @@ Call the advisor tool at each of these moments. Give it the goal, the relevant c
 
 1. Before finalizing a plan that touches more than one file or changes an interface, schema or architecture. Send the plan and ask what is wrong with it.
 2. When the same test or compiler error fails twice in a row after an attempted fix. Stop patching, send the error, both attempts and your current hypothesis, and ask for a diagnosis.
-3. Before declaring a task complete or staging a git commit. Send the full diff and the original request, and ask the advisor to audit it as a contract: does the diff do what was asked, nothing more, and does anything in it break existing behavior or tests?
+3. Before declaring a task complete or staging a git commit, when the diff touches 2 or more files. Skip this checkpoint for single-file changes. Send the full diff and the original request, and ask the advisor to audit it as a contract: does the diff do what was asked, nothing more, and does anything in it break existing behavior or tests?
 
 If the advisor raises a blocking issue, fix it and re-run the relevant check before continuing. If you disagree with the advisor, say so to the user with your reasoning instead of silently ignoring it.
